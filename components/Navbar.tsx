@@ -75,7 +75,7 @@ export default function Navbar() {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-2"
       >
         <div
-          className="flex items-center gap-0.5 sm:gap-3 px-2 sm:px-7 py-2 sm:py-2.5 rounded-full"
+          className="flex items-center gap-0.5 sm:gap-4 px-2 sm:px-10 py-2 sm:py-3 rounded-full"
           style={dockStyle}
         >
           {/* Brand — hidden on mobile */}

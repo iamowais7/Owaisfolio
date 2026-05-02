@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "PowerShell(node --version)",
-      "PowerShell(npm --version)"
+      "PowerShell(npm --version)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm run *)"
     ]
   }
 }

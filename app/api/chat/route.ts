@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     model: groq("llama-3.1-8b-instant"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
-    maxTokens: 400,
+    providerOptions: { groq: { max_tokens: 400 } },
   });
 
   return result.toUIMessageStreamResponse();

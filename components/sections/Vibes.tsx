@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 
 const GRADIENTS = [
@@ -26,7 +26,71 @@ const ACCENTS = [
 
 type MediaFile = { src: string; type: "video" | "image" };
 
-function VibeCard({ file, index, inView }: { file: MediaFile; index: number; inView: boolean }) {
+/* ── Lightbox ── */
+function Lightbox({ file, onClose }: { file: MediaFile; onClose: () => void }) {
+  const isMov = file.src.toLowerCase().endsWith(".mov");
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-100 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(16px)" }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.85, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.85, opacity: 0 }}
+        transition={{ duration: 0.25, ease: "circOut" as const }}
+        className="relative max-h-[90vh] max-w-[90vw] rounded-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {file.type === "image" ? (
+          <Image
+            src={file.src}
+            alt=""
+            width={800}
+            height={1000}
+            className="object-contain max-h-[85vh] w-auto rounded-2xl"
+            style={{ maxWidth: "90vw" }}
+          />
+        ) : (
+          <video
+            className="max-h-[85vh] w-auto rounded-2xl"
+            style={{ maxWidth: "90vw" }}
+            autoPlay loop muted playsInline controls
+          >
+            {isMov
+              ? <source src={file.src} type="video/quicktime" />
+              : <source src={file.src} type="video/mp4" />
+            }
+          </video>
+        )}
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+          style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.15)" }}
+        >
+          <X size={16} className="text-white" />
+        </button>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ── Card ── */
+function VibeCard({ file, index, inView, onClick }: { file: MediaFile; index: number; inView: boolean; onClick: () => void }) {
   const gradient = GRADIENTS[index % GRADIENTS.length];
   const accent   = ACCENTS[index % ACCENTS.length];
   const isMov    = file.src.toLowerCase().endsWith(".mov");
@@ -48,6 +112,7 @@ function VibeCard({ file, index, inView }: { file: MediaFile; index: number; inV
       whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={onClick}
     >
       <div className={`aspect-9/16 w-full bg-linear-to-br ${gradient} relative overflow-hidden glass border border-slate-700/30`}>
         <div className="absolute inset-0 opacity-30 pointer-events-none"
@@ -84,19 +149,18 @@ function VibeCard({ file, index, inView }: { file: MediaFile; index: number; inV
   );
 }
 
+/* ── Section ── */
 export default function Vibes() {
-  const ref     = useRef(null);
+  const ref      = useRef(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const inView  = useInView(ref, { once: true, margin: "-60px" });
-  const [files, setFiles] = useState<MediaFile[]>([]);
+  const inView   = useInView(ref, { once: true, margin: "-60px" });
+  const [files, setFiles]       = useState<MediaFile[]>([]);
   const [canLeft,  setCanLeft]  = useState(false);
   const [canRight, setCanRight] = useState(false);
+  const [lightbox, setLightbox] = useState<MediaFile | null>(null);
 
   useEffect(() => {
-    fetch("/api/media")
-      .then((r) => r.json())
-      .then(setFiles)
-      .catch(() => {});
+    fetch("/api/media").then((r) => r.json()).then(setFiles).catch(() => {});
   }, []);
 
   const updateArrows = () => {
@@ -156,45 +220,38 @@ export default function Vibes() {
         {/* Carousel */}
         {files.length > 0 ? (
           <div className="relative mb-14">
-            {/* Left arrow */}
             <motion.button
               onClick={() => scroll("left")}
               animate={{ opacity: canLeft ? 1 : 0, pointerEvents: canLeft ? "auto" : "none" }}
               transition={{ duration: 0.2 }}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full flex items-center justify-center"
-              style={{
-                background: "rgba(8,12,35,0.85)",
-                border: "1px solid rgba(99,102,241,0.25)",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-              }}
+              style={{ background: "rgba(8,12,35,0.85)", border: "1px solid rgba(99,102,241,0.25)", backdropFilter: "blur(12px)", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
             >
               <ChevronLeft size={18} className="text-slate-300" />
             </motion.button>
 
-            {/* Scroll track */}
             <div
               ref={scrollRef}
               className="flex gap-4 overflow-x-auto pb-2"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {files.map((file, i) => (
-                <VibeCard key={file.src} file={file} index={i} inView={inView} />
+                <VibeCard
+                  key={file.src}
+                  file={file}
+                  index={i}
+                  inView={inView}
+                  onClick={() => setLightbox(file)}
+                />
               ))}
             </div>
 
-            {/* Right arrow */}
             <motion.button
               onClick={() => scroll("right")}
               animate={{ opacity: canRight ? 1 : 0, pointerEvents: canRight ? "auto" : "none" }}
               transition={{ duration: 0.2 }}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full flex items-center justify-center"
-              style={{
-                background: "rgba(8,12,35,0.85)",
-                border: "1px solid rgba(99,102,241,0.25)",
-                backdropFilter: "blur(12px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
-              }}
+              style={{ background: "rgba(8,12,35,0.85)", border: "1px solid rgba(99,102,241,0.25)", backdropFilter: "blur(12px)", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
             >
               <ChevronRight size={18} className="text-slate-300" />
             </motion.button>
@@ -231,6 +288,11 @@ export default function Vibes() {
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && <Lightbox file={lightbox} onClose={() => setLightbox(null)} />}
+      </AnimatePresence>
     </section>
   );
 }

@@ -108,7 +108,7 @@ export default function AiChat() {
                   <p className="text-slate-100 text-sm font-semibold font-display leading-none">Ask about Owais</p>
                   <p className="text-emerald-400 text-[10px] font-mono mt-0.5 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
-                    AI · Powered by Claude
+                    AI · Powered by Groq
                   </p>
                 </div>
               </div>

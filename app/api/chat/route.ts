@@ -1,5 +1,5 @@
 import { streamText, convertToModelMessages } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
+import { createGroq } from "@ai-sdk/groq";
 
 const SYSTEM_PROMPT = `You are an AI assistant embedded in Mohammad Owais Khan's personal portfolio website. Your job is to answer questions about Owais — his skills, experience, projects, availability, and background. Be friendly, concise, and professional. Keep answers under 120 words unless a detailed breakdown is explicitly requested.
 
@@ -57,14 +57,16 @@ Rides bikes on weekends (Delhi NCR highways), plays snooker, AMU campus nostalgi
 - Never make up information not listed above
 - If unsure, say so and suggest contacting Owais directly at khan.owais0555@gmail.com`;
 
+const groq = createGroq({ apiKey: process.env.GROQ_API_KEY });
+
 export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = streamText({
-    model: anthropic("claude-haiku-4-5-20251001"),
+    model: groq("llama-3.1-8b-instant"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
-    providerOptions: { anthropic: { max_tokens: 400 } },
+    maxTokens: 400,
   });
 
   return result.toUIMessageStreamResponse();

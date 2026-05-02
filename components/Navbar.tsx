@@ -50,16 +50,16 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Hire Me — top right (sm and above) ── */}
+      {/* ── Hire Me — top right (always visible) ── */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="fixed top-5 right-4 sm:right-6 z-50 hidden sm:block"
+        className="fixed top-4 right-3 sm:top-5 sm:right-6 z-50"
       >
         <motion.button
           onClick={() => scrollTo("#contact")}
-          className="btn-primary text-sm py-2 px-5"
+          className="btn-primary text-xs py-1.5 px-3 sm:text-sm sm:py-2 sm:px-5"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
         >
@@ -196,16 +196,6 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Hire Me — inside dock on mobile only */}
-          <div className="w-px h-5 mx-0.5 bg-slate-700/50 rounded-full sm:hidden" />
-          <motion.button
-            onClick={() => scrollTo("#contact")}
-            className="btn-primary text-[11px] py-1 px-2.5 shrink-0 sm:hidden"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            Hire Me
-          </motion.button>
         </div>
       </motion.div>
     </>

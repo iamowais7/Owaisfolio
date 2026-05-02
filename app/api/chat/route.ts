@@ -1,4 +1,4 @@
-import { streamText } from "ai";
+import { streamText, convertToModelMessages } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 
 const SYSTEM_PROMPT = `You are an AI assistant embedded in Mohammad Owais Khan's personal portfolio website. Your job is to answer questions about Owais — his skills, experience, projects, availability, and background. Be friendly, concise, and professional. Keep answers under 120 words unless a detailed breakdown is explicitly requested.
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
   const result = streamText({
     model: anthropic("claude-haiku-4-5-20251001"),
     system: SYSTEM_PROMPT,
-    messages,
+    messages: convertToModelMessages(messages),
     providerOptions: { anthropic: { max_tokens: 400 } },
   });
 

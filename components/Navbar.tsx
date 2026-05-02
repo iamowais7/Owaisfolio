@@ -38,44 +38,24 @@ export default function Navbar() {
   const isLight = mounted && theme === "light";
 
   const dockStyle = isLight
-    ? {
-        background: "rgba(255,255,255,0.92)",
-        border: "1px solid rgba(99,102,241,0.25)",
-        backdropFilter: "blur(24px)",
-        boxShadow: "0 8px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(99,102,241,0.1), inset 0 1px 0 rgba(255,255,255,0.8)",
-      }
-    : {
-        background: "rgba(8, 12, 35, 0.82)",
-        border: "1px solid rgba(99,102,241,0.2)",
-        backdropFilter: "blur(24px)",
-        boxShadow: "0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.05)",
-      };
+    ? { background: "rgba(255,255,255,0.92)", border: "1px solid rgba(99,102,241,0.25)", backdropFilter: "blur(24px)", boxShadow: "0 8px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)" }
+    : { background: "rgba(8, 12, 35, 0.82)", border: "1px solid rgba(99,102,241,0.2)", backdropFilter: "blur(24px)", boxShadow: "0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.08), inset 0 1px 0 rgba(255,255,255,0.05)" };
 
   const tooltipStyle = isLight
-    ? {
-        background: "rgba(255,255,255,0.98)",
-        border: "1px solid rgba(99,102,241,0.3)",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
-        color: "#1e293b",
-      }
-    : {
-        background: "rgba(15,23,42,0.95)",
-        border: "1px solid rgba(99,102,241,0.25)",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-        color: "#f1f5f9",
-      };
+    ? { background: "rgba(255,255,255,0.98)", border: "1px solid rgba(99,102,241,0.3)", boxShadow: "0 4px 12px rgba(0,0,0,0.12)", color: "#1e293b" }
+    : { background: "rgba(15,23,42,0.95)", border: "1px solid rgba(99,102,241,0.25)", boxShadow: "0 4px 12px rgba(0,0,0,0.3)", color: "#f1f5f9" };
 
   const tooltipArrowColor = isLight ? "rgba(255,255,255,0.98)" : "rgba(15,23,42,0.95)";
   const iconInactiveColor = isLight ? "rgb(71,85,105)" : "rgb(100,116,139)";
 
   return (
     <>
-      {/* ── Hire Me — top right ── */}
+      {/* ── Hire Me — top right (sm and above) ── */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="fixed top-5 right-6 z-50 hidden md:block"
+        className="fixed top-5 right-4 sm:right-6 z-50 hidden sm:block"
       >
         <motion.button
           onClick={() => scrollTo("#contact")}
@@ -92,24 +72,24 @@ export default function Navbar() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4, ease: "circOut" as const }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-2"
       >
         <div
-          className="flex items-center gap-3 px-7 py-2.5 rounded-full"
+          className="flex items-center gap-0.5 sm:gap-3 px-2 sm:px-7 py-2 sm:py-2.5 rounded-full"
           style={dockStyle}
         >
-          {/* Brand */}
+          {/* Brand — hidden on mobile */}
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="font-display font-bold text-base gradient-text-cyan select-none px-2"
+            className="font-display font-bold text-sm sm:text-base gradient-text-cyan select-none px-1 sm:px-2 hidden sm:block"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             iamowais
           </motion.button>
 
-          {/* Divider */}
-          <div className="w-px h-6 mx-1 bg-slate-700/50 rounded-full" />
+          {/* Divider — hidden on mobile */}
+          <div className="w-px h-5 mx-0.5 sm:mx-1 bg-slate-700/50 rounded-full hidden sm:block" />
 
           {/* Nav icons */}
           {navLinks.map(({ label, href, icon: Icon }) => {
@@ -121,7 +101,6 @@ export default function Navbar() {
                 onMouseEnter={() => setHoveredLabel(label)}
                 onMouseLeave={() => setHoveredLabel(null)}
               >
-                {/* Tooltip */}
                 <AnimatePresence>
                   {hoveredLabel === label && (
                     <motion.div
@@ -141,7 +120,7 @@ export default function Navbar() {
 
                 <motion.button
                   onClick={() => scrollTo(href)}
-                  className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200"
+                  className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors duration-200"
                   style={{ background: isActive ? "rgba(99,102,241,0.15)" : "transparent" }}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
@@ -149,7 +128,7 @@ export default function Navbar() {
                   transition={{ duration: 0.2 }}
                 >
                   <Icon
-                    size={17}
+                    size={15}
                     style={{
                       color: isActive ? "#818cf8" : iconInactiveColor,
                       filter: isActive ? "drop-shadow(0 0 6px rgba(129,140,248,0.7))" : "none",
@@ -169,7 +148,7 @@ export default function Navbar() {
           })}
 
           {/* Divider */}
-          <div className="w-px h-6 mx-1 bg-slate-700/50 rounded-full" />
+          <div className="w-px h-5 mx-0.5 sm:mx-1 bg-slate-700/50 rounded-full" />
 
           {/* Theme toggle */}
           {mounted && (
@@ -197,7 +176,8 @@ export default function Navbar() {
 
               <motion.button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="w-10 h-10 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-200 transition-colors"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors"
+                style={{ color: iconInactiveColor }}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -209,12 +189,23 @@ export default function Navbar() {
                     exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                    {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
                   </motion.span>
                 </AnimatePresence>
               </motion.button>
             </div>
           )}
+
+          {/* Hire Me — inside dock on mobile only */}
+          <div className="w-px h-5 mx-0.5 bg-slate-700/50 rounded-full sm:hidden" />
+          <motion.button
+            onClick={() => scrollTo("#contact")}
+            className="btn-primary text-[11px] py-1 px-2.5 shrink-0 sm:hidden"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Hire Me
+          </motion.button>
         </div>
       </motion.div>
     </>

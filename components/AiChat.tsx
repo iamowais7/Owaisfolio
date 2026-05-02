@@ -95,7 +95,7 @@ export default function AiChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25, ease: "circOut" as const }}
-            className="fixed bottom-24 right-4 sm:right-6 z-55 w-[92vw] sm:w-95 flex flex-col rounded-2xl overflow-hidden"
+            className="fixed bottom-36 sm:bottom-24 right-4 sm:right-6 z-55 w-[92vw] sm:w-95 flex flex-col rounded-2xl overflow-hidden"
             style={{ height: "min(520px, 75vh)", background: panelBg, border: `1px solid ${panelBorder}`, boxShadow: panelShadow, backdropFilter: "blur(32px)" }}
           >
             {/* Header */}
@@ -241,7 +241,7 @@ export default function AiChat() {
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 8 }} transition={{ duration: 0.22, ease: "circOut" as const }}
-            className="fixed bottom-24 right-4 sm:right-6 z-55 max-w-55 pointer-events-none"
+            className="fixed bottom-36 sm:bottom-24 right-4 sm:right-6 z-55 max-w-55 pointer-events-none"
           >
             <div className="relative px-4 py-3 rounded-2xl rounded-br-sm text-sm font-medium leading-snug"
               style={L ? {
@@ -263,7 +263,7 @@ export default function AiChat() {
       {/* ── Trigger button ── */}
       <motion.button
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-6 right-4 sm:right-6 z-55 w-14 h-14 rounded-full flex items-center justify-center"
+        className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-55 w-14 h-14 rounded-full flex items-center justify-center"
         style={{
           background: open ? (L ? "rgba(238,240,255,0.95)" : "rgba(30,27,75,0.9)") : "linear-gradient(135deg, #6366f1, #8b5cf6)",
           boxShadow: open ? "0 0 0 2px rgba(99,102,241,0.4)" : "0 0 0 3px rgba(99,102,241,0.25), 0 8px 32px rgba(99,102,241,0.45)",

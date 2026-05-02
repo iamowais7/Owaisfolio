@@ -1,11 +1,22 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ExternalLink, Star, GitFork } from "lucide-react";
+import { motion, useInView, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { ExternalLink, Star, GitFork, ChevronLeft, ChevronRight } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 
 const projects = [
+  {
+    title:       "Owaisfolio",
+    description: "The very site you're on. Built with Next.js 16, Tailwind v4, and Framer Motion. Features particle constellation canvas, AI chatbot, aurora backgrounds, and cinematic scroll animations.",
+    tags:        ["Next.js 16", "Tailwind v4", "Framer Motion", "TypeScript", "React 19"],
+    github:      "https://github.com/iamowais7/Owaisfolio",
+    demo:        "https://owaisfolio.vercel.app",
+    stars:       0,
+    forks:       0,
+    gradient:    "from-indigo-500/20 via-violet-500/10 to-purple-500/10",
+    accentColor: "#818cf8",
+  },
   {
     title:       "AI Trip Planner",
     description: "Plan your dream trip in seconds. Input destination, dates and preferences — get a fully personalized day-by-day itinerary powered by AI. No more tab-switching through travel blogs.",
@@ -14,21 +25,41 @@ const projects = [
     demo:        "https://ai-integrated-trip-planner.vercel.app/",
     stars:       0,
     forks:       0,
-    featured:    true,
     gradient:    "from-cyan-500/20 via-blue-500/10 to-indigo-500/10",
     accentColor: "#22d3ee",
   },
   {
-    title:       "Owaisfolio",
-    description: "The very site you're on. Built with Next.js 16, Tailwind v4, and Framer Motion. Features particle constellation canvas, custom spring cursor, aurora backgrounds, and cinematic scroll animations.",
-    tags:        ["Next.js 16", "Tailwind v4", "Framer Motion", "TypeScript", "React 19"],
+    title:       "Plusfeed",
+    description: "A modern content feed platform built for seamless discovery and sharing. Clean UI with real-time updates and a smooth, responsive experience across all devices.",
+    tags:        ["React", "JavaScript", "Tailwind CSS"],
     github:      "https://github.com/iamowais7",
-    demo:        "#",
+    demo:        "https://plusfeed.vercel.app/",
     stars:       0,
     forks:       0,
-    featured:    true,
-    gradient:    "from-indigo-500/20 via-violet-500/10 to-purple-500/10",
-    accentColor: "#818cf8",
+    gradient:    "from-pink-500/20 via-rose-500/10 to-fuchsia-500/10",
+    accentColor: "#ec4899",
+  },
+  {
+    title:       "Payment App",
+    description: "A clean and intuitive payment interface with smooth transaction flows, real-time status updates, and a secure UX built for modern fintech use cases.",
+    tags:        ["React", "JavaScript", "Tailwind CSS"],
+    github:      "https://github.com/iamowais7",
+    demo:        "https://payment-henna-rho.vercel.app/",
+    stars:       0,
+    forks:       0,
+    gradient:    "from-emerald-500/20 via-teal-500/10 to-green-500/10",
+    accentColor: "#34d399",
+  },
+  {
+    title:       "Team Task Manager",
+    description: "Collaborative task management tool for teams. Assign tasks, track progress, set deadlines, and keep everyone aligned — all in one clean dashboard.",
+    tags:        ["React", "JavaScript", "Tailwind CSS"],
+    github:      "https://github.com/iamowais7",
+    demo:        "https://team-task-manager-beryl-seven.vercel.app/",
+    stars:       0,
+    forks:       0,
+    gradient:    "from-amber-500/20 via-orange-500/10 to-yellow-500/10",
+    accentColor: "#f59e0b",
   },
   {
     title:       "FitFeast AI",
@@ -38,43 +69,6 @@ const projects = [
     demo:        null,
     stars:       1,
     forks:       0,
-    featured:    true,
-    gradient:    "from-emerald-500/20 via-teal-500/10 to-green-500/10",
-    accentColor: "#34d399",
-  },
-  {
-    title:       "Cookmate AI",
-    description: "AI-powered recipe generator that suggests personalized recipes based on ingredients you already have. Reduces food waste and makes cooking effortless.",
-    tags:        ["TypeScript", "AI", "React"],
-    github:      "https://github.com/iamowais7/Cookmate-AI",
-    demo:        null,
-    stars:       0,
-    forks:       0,
-    featured:    false,
-    gradient:    "from-orange-500/20 via-amber-500/10 to-yellow-500/10",
-    accentColor: "#f97316",
-  },
-  {
-    title:       "VEHIQL",
-    description: "AI-powered car marketplace where intelligent recommendations help buyers find the perfect vehicle match based on preferences, budget, and usage patterns.",
-    tags:        ["JavaScript", "AI", "React", "Node.js"],
-    github:      "https://github.com/iamowais7/VEHIQL",
-    demo:        null,
-    stars:       0,
-    forks:       0,
-    featured:    false,
-    gradient:    "from-red-500/20 via-rose-500/10 to-pink-500/10",
-    accentColor: "#f43f5e",
-  },
-  {
-    title:       "AI Document Q&A",
-    description: "Upload any document or media file and ask questions about it. Powered by AI for intelligent extraction and contextual answers across text, images, and more.",
-    tags:        ["Python", "AI", "FastAPI", "LLM"],
-    github:      "https://github.com/iamowais7/AI-Powered-Document-Multimedia-Q-A-Web-Application",
-    demo:        null,
-    stars:       0,
-    forks:       0,
-    featured:    false,
     gradient:    "from-violet-500/20 via-purple-500/10 to-fuchsia-500/10",
     accentColor: "#a78bfa",
   },
@@ -100,12 +94,12 @@ function ProjectCard({ project, index, inView }: { project: (typeof projects)[0]
   return (
     <motion.div
       ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: "circOut" as const }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: "circOut" as const }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1000 }}
+      style={{ rotateX, rotateY, transformPerspective: 1000, width: 320, flexShrink: 0 }}
       className="group"
     >
       <div className={`glass glow-border rounded-2xl overflow-hidden holographic h-full flex flex-col bg-linear-to-br ${project.gradient} relative`}>
@@ -172,13 +166,22 @@ function ProjectCard({ project, index, inView }: { project: (typeof projects)[0]
 }
 
 export default function Projects() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [showAll, setShowAll] = useState(false);
+  const ref       = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inView    = useInView(ref, { once: true, margin: "-80px" });
+  const [canLeft,  setCanLeft]  = useState(false);
+  const [canRight, setCanRight] = useState(true);
 
-  const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-  const visible = showAll ? projects : featured;
+  const updateArrows = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 8);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  };
+
+  const scroll = (dir: "left" | "right") => {
+    scrollRef.current?.scrollBy({ left: dir === "left" ? -360 : 360, behavior: "smooth" });
+  };
 
   return (
     <section id="projects" ref={ref} className="relative py-32 bg-slate-900/40 overflow-hidden">
@@ -202,20 +205,50 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {visible.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} inView={inView} />
-          ))}
-        </div>
-
-        <div className="text-center">
+        {/* Carousel */}
+        <div className="relative">
+          {/* Left arrow */}
           <motion.button
-            onClick={() => setShowAll(!showAll)}
-            className="btn-secondary inline-flex"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            onClick={() => scroll("left")}
+            animate={{ opacity: canLeft ? 1 : 0, pointerEvents: canLeft ? "auto" : "none" }}
+            transition={{ duration: 0.2 }}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center"
+            style={{
+              background: "rgba(8,12,35,0.85)",
+              border: "1px solid rgba(99,102,241,0.25)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+            }}
           >
-            {showAll ? "Show Less" : `View All Projects (+${rest.length} more)`}
+            <ChevronLeft size={18} className="text-slate-300" />
+          </motion.button>
+
+          {/* Scroll track */}
+          <div
+            ref={scrollRef}
+            onScroll={updateArrows}
+            className="flex gap-5 overflow-x-auto pb-4"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {projects.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} inView={inView} />
+            ))}
+          </div>
+
+          {/* Right arrow */}
+          <motion.button
+            onClick={() => scroll("right")}
+            animate={{ opacity: canRight ? 1 : 0, pointerEvents: canRight ? "auto" : "none" }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-10 h-10 rounded-full flex items-center justify-center"
+            style={{
+              background: "rgba(8,12,35,0.85)",
+              border: "1px solid rgba(99,102,241,0.25)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
+            }}
+          >
+            <ChevronRight size={18} className="text-slate-300" />
           </motion.button>
         </div>
       </div>

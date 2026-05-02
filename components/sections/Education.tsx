@@ -26,11 +26,11 @@ const education = [
 ];
 
 const certifications = [
-  { name: "Python for Data Science, AI & Development",            issuer: "IBM / Coursera", year: "2024", color: "#3776ab" },
-  { name: "Introduction to Data Analytics",                       issuer: "IBM / Coursera", year: "2024", color: "#006699" },
-  { name: "Data Visualization & Dashboards with Excel & Cognos",  issuer: "IBM / Coursera", year: "2024", color: "#054ada" },
-  { name: "Excel Basics for Data Analysis",                       issuer: "IBM / Coursera", year: "2024", color: "#21a366" },
-  { name: "STTP in Artificial Intelligence & Machine Learning",   issuer: "AMU",            year: "2024", color: "#f97316" },
+  { name: "Short Term Training Program in Artificial Intelligence & Machine Learning", issuer: "AMU",            year: "2024", color: "#f97316" },
+  { name: "Python for Data Science, AI & Development",                                issuer: "IBM / Coursera", year: "2024", color: "#3776ab" },
+  { name: "Introduction to Data Analytics",                                           issuer: "IBM / Coursera", year: "2024", color: "#006699" },
+  { name: "Data Visualization & Dashboards with Excel & Cognos",                     issuer: "IBM / Coursera", year: "2024", color: "#054ada" },
+  { name: "Excel Basics for Data Analysis",                                           issuer: "IBM / Coursera", year: "2024", color: "#21a366" },
 ];
 
 export default function Education() {

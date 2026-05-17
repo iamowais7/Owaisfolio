@@ -171,7 +171,7 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.5, ease: "circOut" as const }}
           >
             {/* Photo + floating badges wrapper */}
-            <div className="relative" style={{ width: "clamp(190px, 50vw, 290px)", height: "clamp(190px, 50vw, 290px)" }}>
+            <div className="relative" style={{ width: "clamp(220px, 65vw, 290px)", height: "clamp(220px, 65vw, 290px)" }}>
               {/* Spinning gradient ring */}
               <div
                 className="absolute rounded-full"
@@ -207,6 +207,7 @@ export default function Hero() {
                 { label: "FastAPI",   color: "#009688", bottom: "5%",  left: "-18%",  dur: 3.5 },
                 { label: "REST API",  color: "#f59e0b", top: "20%",   right: "-30%", dur: 4.4 },
                 { label: "React.js",  color: "#61dafb", bottom: "35%", left: "-30%",  dur: 3.9 },
+                { label: "OAuth 2.0", color: "#f43f5e", top: "5%",    left: "-30%",  dur: 4.6 },
               ].map(({ label, color, dur, ...pos }) => (
                 <motion.div
                   key={label}
@@ -221,14 +222,15 @@ export default function Hero() {
             </div>
 
             {/* Tech badges — mobile only, shown as a grid below photo */}
-            <div className="flex flex-wrap justify-center gap-2 lg:hidden">
+            <div className="flex flex-wrap justify-center gap-2 lg:hidden mb-16">
               {[
-                { label: "Node.js",  color: "#68a063" },
-                { label: "Python",   color: "#3776ab" },
-                { label: "Fluree",   color: "#818cf8" },
-                { label: "FastAPI",  color: "#009688" },
-                { label: "REST API", color: "#f59e0b" },
-                { label: "React.js", color: "#61dafb" },
+                { label: "Node.js",   color: "#68a063" },
+                { label: "Python",    color: "#3776ab" },
+                { label: "Fluree",    color: "#818cf8" },
+                { label: "FastAPI",   color: "#009688" },
+                { label: "REST API",  color: "#f59e0b" },
+                { label: "React.js",  color: "#61dafb" },
+                { label: "OAuth 2.0", color: "#f43f5e" },
               ].map(({ label, color }) => (
                 <span
                   key={label}

@@ -165,61 +165,80 @@ export default function Hero() {
 
           {/* Right: avatar */}
           <motion.div
-            className="relative shrink-0"
+            className="flex flex-col items-center gap-5 shrink-0"
             initial={{ opacity: 0, scale: 0.8, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.5, ease: "circOut" as const }}
           >
-            {/* Spinning gradient ring */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                background: "conic-gradient(from 0deg, #6366f1, #8b5cf6, #22d3ee, #ec4899, #6366f1)",
-                borderRadius: "50%",
-                animation: "spin 8s linear infinite",
-                width: "calc(100% + 8px)",
-                height: "calc(100% + 8px)",
-                top: -4, left: -4,
-              }}
-            />
-            {/* Photo */}
-            <div
-              className="relative rounded-full overflow-hidden"
-              style={{
-                width: 290,
-                height: 290,
-                boxShadow: "0 0 60px rgba(99,102,241,0.3), 0 0 120px rgba(99,102,241,0.12)",
-              }}
-            >
-              <Image
-                src="/owais.jpeg"
-                alt="Mohammad Owais Khan"
-                fill
-                sizes="290px"
-                className="object-cover object-top"
-                priority
+            {/* Photo + floating badges wrapper */}
+            <div className="relative" style={{ width: "clamp(190px, 50vw, 290px)", height: "clamp(190px, 50vw, 290px)" }}>
+              {/* Spinning gradient ring */}
+              <div
+                className="absolute rounded-full"
+                style={{
+                  background: "conic-gradient(from 0deg, #6366f1, #8b5cf6, #22d3ee, #ec4899, #6366f1)",
+                  borderRadius: "50%",
+                  animation: "spin 8s linear infinite",
+                  width: "calc(100% + 8px)",
+                  height: "calc(100% + 8px)",
+                  top: -4, left: -4,
+                }}
               />
+              {/* Photo */}
+              <div
+                className="relative rounded-full overflow-hidden w-full h-full"
+                style={{ boxShadow: "0 0 60px rgba(99,102,241,0.3), 0 0 120px rgba(99,102,241,0.12)" }}
+              >
+                <Image
+                  src="/owais.jpeg"
+                  alt="Mohammad Owais Khan"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 290px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+
+              {/* Floating badges — desktop only */}
+              {[
+                { label: "Node.js",   color: "#68a063", top: "5%",    right: "-25%", dur: 3.2 },
+                { label: "Python",    color: "#3776ab", bottom: "15%", right: "-28%", dur: 3.8 },
+                { label: "Fluree",    color: "#818cf8", top: "40%",   left: "-28%",  dur: 4.1 },
+                { label: "FastAPI",   color: "#009688", bottom: "5%",  left: "-18%",  dur: 3.5 },
+                { label: "REST API",  color: "#f59e0b", top: "20%",   right: "-30%", dur: 4.4 },
+                { label: "React.js",  color: "#61dafb", bottom: "35%", left: "-30%",  dur: 3.9 },
+              ].map(({ label, color, dur, ...pos }) => (
+                <motion.div
+                  key={label}
+                  className="absolute px-3 py-1.5 rounded-full glass border text-xs font-mono font-semibold hidden lg:block"
+                  style={{ ...pos, color, borderColor: `${color}33`, boxShadow: `0 0 12px ${color}22` }}
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: dur, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  {label}
+                </motion.div>
+              ))}
             </div>
 
-            {/* Floating tech badges — fixed durations to avoid hydration mismatch */}
-            {[
-              { label: "Node.js",   color: "#68a063", top: "5%",    right: "-25%", dur: 3.2 },
-              { label: "Python",    color: "#3776ab", bottom: "15%", right: "-28%", dur: 3.8 },
-              { label: "Fluree",    color: "#818cf8", top: "40%",   left: "-28%",  dur: 4.1 },
-              { label: "FastAPI",   color: "#009688", bottom: "5%",  left: "-18%",  dur: 3.5 },
-              { label: "REST API",  color: "#f59e0b", top: "20%",   right: "-30%", dur: 4.4 },
-              { label: "React.js",  color: "#61dafb", bottom: "35%", left: "-30%",  dur: 3.9 },
-            ].map(({ label, color, dur, ...pos }) => (
-              <motion.div
-                key={label}
-                className="absolute px-3 py-1.5 rounded-full glass border text-xs font-mono font-semibold"
-                style={{ ...pos, color, borderColor: `${color}33`, boxShadow: `0 0 12px ${color}22` }}
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: dur, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {label}
-              </motion.div>
-            ))}
+            {/* Tech badges — mobile only, shown as a grid below photo */}
+            <div className="flex flex-wrap justify-center gap-2 lg:hidden">
+              {[
+                { label: "Node.js",  color: "#68a063" },
+                { label: "Python",   color: "#3776ab" },
+                { label: "Fluree",   color: "#818cf8" },
+                { label: "FastAPI",  color: "#009688" },
+                { label: "REST API", color: "#f59e0b" },
+                { label: "React.js", color: "#61dafb" },
+              ].map(({ label, color }) => (
+                <span
+                  key={label}
+                  className="px-3 py-1.5 rounded-full glass border text-xs font-mono font-semibold"
+                  style={{ color, borderColor: `${color}33`, boxShadow: `0 0 10px ${color}22` }}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>

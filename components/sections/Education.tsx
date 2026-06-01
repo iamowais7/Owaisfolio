@@ -123,7 +123,7 @@ export default function Education() {
                 <p className="text-slate-100 text-sm font-medium leading-snug mb-2">{cert.name}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-500 text-xs">{cert.issuer}</span>
-                  <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-800/80 text-slate-400">{cert.year}</span>
+                  <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400">{cert.year}</span>
                 </div>
               </motion.div>
             ))}

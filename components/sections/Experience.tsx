@@ -7,8 +7,8 @@ import { Briefcase, ChevronDown, ExternalLink } from "lucide-react";
 const experiences = [
   {
     company:    "Fluree",
-    role:       "Software Engineer",
-    duration:   "April 2026 – Present",
+    role:       "Software Development Engineer",
+    duration:   "November 2025 – Present",
     location:   "Delhi, India (Remote)",
     type:       "Full-time",
     current:    true,
@@ -26,7 +26,7 @@ const experiences = [
   {
     company:    "Fluree",
     role:       "Software Trainee",
-    duration:   "August 2025 – April 2026",
+    duration:   "August 2025 – October 2025",
     location:   "Delhi, India (Remote)",
     type:       "Trainee",
     current:    false,

@@ -9,7 +9,7 @@ import Image from "next/image";
 import ParticleCanvas from "../ParticleCanvas";
 
 const ROLES = [
-  "Software Engineer @ Fluree",
+  "Software Development Engineer @ Fluree",
   "Backend Systems Builder",
   "Data Pipeline Architect",
   "AI Integration Specialist",
@@ -78,7 +78,7 @@ export default function Hero() {
             <motion.div variants={item} className="mb-6">
               <span className="section-tag">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Software Engineer @ Fluree · Open to Opportunities
+                Software Development Engineer @ Fluree · Open to Opportunities
               </span>
             </motion.div>
 

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Briefcase, ChevronDown, ExternalLink } from "lucide-react";
+import ScrambleText from "../ScrambleText";
 
 const experiences = [
   {
@@ -155,7 +156,7 @@ export default function Experience() {
         >
           <span className="section-tag mb-4 inline-flex"><Briefcase size={12} />Work History</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Work <span className="gradient-text">Experience</span>
+            Work <ScrambleText text="Experience" trigger={inView} className="gradient-text" delay={200} />
           </h2>
         </motion.div>
 

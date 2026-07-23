@@ -1,8 +1,34 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Server, Database, Cpu, MapPin, Coffee, Zap } from "lucide-react";
+import ScrambleText from "../ScrambleText";
+import GithubHeatmap from "../GithubHeatmap";
+
+function AnimatedCounter({ value, color, inView }: { value: string; color: string; inView: boolean }) {
+  const match  = value.match(/^(\d+)(\D*)$/);
+  const target = match ? parseInt(match[1]) : 0;
+  const suffix = match ? match[2] : "";
+  const [count, setCount] = useState(0);
+  const rafRef = useRef(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const start = performance.now();
+    const dur   = 1400;
+    const tick  = (now: number) => {
+      const t      = Math.min((now - start) / dur, 1);
+      const eased  = 1 - Math.pow(1 - t, 3);
+      setCount(Math.round(eased * target));
+      if (t < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [inView, target]);
+
+  return <span style={{ color }}>{count}{suffix}</span>;
+}
 
 const stats = [
   { value: "10+",  label: "Months at Fluree",    color: "#818cf8" },
@@ -62,7 +88,7 @@ export default function About() {
         >
           <span className="section-tag mb-4 inline-flex">About Me</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Who I <span className="gradient-text">Am</span>
+            Who I <ScrambleText text="Am" trigger={inView} className="gradient-text" delay={200} />
           </h2>
         </motion.div>
 
@@ -118,19 +144,19 @@ export default function About() {
               <Zap size={16} className="text-yellow-400" />
               <span className="text-slate-300 text-sm">Performance-first · Production-proven</span>
             </div>
-            <div className="mt-auto flex items-end gap-1.5 h-14">
+            <div className="mt-auto flex items-end justify-between gap-1 h-14 px-1">
               {[60, 85, 70, 95, 80, 90, 75].map((h, i) => (
                 <motion.div
                   key={i}
-                  className="flex-1 rounded-sm"
-                  style={{ background: `linear-gradient(to top, #6366f1, #8b5cf6)`, opacity: 0.6 + i * 0.05 }}
+                  className="w-5 rounded-sm"
+                  style={{ background: `linear-gradient(to top, #6366f1, #8b5cf6)`, opacity: 0.5 + i * 0.07 }}
                   initial={{ height: 0 }}
                   animate={inView ? { height: `${h}%` } : { height: 0 }}
                   transition={{ delay: 0.6 + i * 0.08, duration: 0.5, ease: "easeOut" }}
                 />
               ))}
             </div>
-            <p className="text-slate-500 text-xs font-mono text-center">weekly commit activity</p>
+            <p className="text-slate-500 text-xs font-mono text-center mt-2">weekly commit activity</p>
           </motion.div>
 
           {/* Stats */}
@@ -138,12 +164,11 @@ export default function About() {
             <motion.div key={stat.label} variants={fadeUp} className="glass glow-border rounded-2xl p-6 text-center holographic">
               <motion.p
                 className="font-display font-bold text-3xl mb-1"
-                style={{ color: stat.color }}
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={inView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ delay: 0.4 + i * 0.1, duration: 0.5, type: "spring" }}
               >
-                {stat.value}
+                <AnimatedCounter value={stat.value} color={stat.color} inView={inView} />
               </motion.p>
               <p className="text-slate-400 text-sm">{stat.label}</p>
             </motion.div>
@@ -159,6 +184,16 @@ export default function About() {
               <p className="text-slate-400 text-sm leading-relaxed">{svc.desc}</p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* GitHub contribution heatmap */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-8 glass glow-border rounded-2xl p-6"
+        >
+          <GithubHeatmap />
         </motion.div>
       </div>
     </section>

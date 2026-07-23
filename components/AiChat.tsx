@@ -262,7 +262,7 @@ export default function AiChat() {
 
       {/* ── Trigger button ── */}
       <motion.button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => { setOpen((v) => { if (!v) document.dispatchEvent(new CustomEvent("open-ai-chat")); return !v; }); }}
         className="fixed bottom-24 sm:bottom-6 right-3 sm:right-6 z-55 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center"
         style={{
           background: open ? (L ? "rgba(238,240,255,0.95)" : "rgba(30,27,75,0.9)") : "linear-gradient(135deg, #6366f1, #8b5cf6)",

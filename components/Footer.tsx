@@ -71,6 +71,12 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Keyboard hints */}
+        <div className="flex flex-wrap justify-center gap-x-6 gap-y-1.5 pb-6 text-[11px] font-mono text-slate-700">
+          <span>psst — press <kbd className="px-1.5 py-0.5 rounded bg-slate-800/60 border border-slate-700/50 text-slate-600">⌘K</kbd> for command palette</span>
+          <span>press <kbd className="px-1.5 py-0.5 rounded bg-slate-800/60 border border-slate-700/50 text-slate-600">`</kbd> for hacker terminal</span>
+        </div>
+
         {/* Bottom bar */}
         <div className="relative flex items-center justify-center pt-6 border-t border-slate-800/40">
           <div className="text-slate-600 text-sm font-mono text-center">

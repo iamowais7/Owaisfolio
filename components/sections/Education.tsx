@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { GraduationCap, Award } from "lucide-react";
+import ScrambleText from "../ScrambleText";
 
 const education = [
   {
@@ -52,7 +53,7 @@ export default function Education() {
         >
           <span className="section-tag mb-4 inline-flex"><GraduationCap size={12} />Education</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Academic <span className="gradient-text">Background</span>
+            Academic <ScrambleText text="Background" trigger={inView} className="gradient-text" delay={200} />
           </h2>
         </motion.div>
 

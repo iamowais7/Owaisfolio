@@ -7,6 +7,8 @@ import { FiGithub, FiLinkedin, FiTwitter, FiInstagram } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import Image from "next/image";
 import ParticleCanvas from "../ParticleCanvas";
+import Magnetic from "../Magnetic";
+import CodeWindow from "../CodeWindow";
 
 const ROLES = [
   "Software Development Engineer @ Fluree",
@@ -70,7 +72,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-24 pb-16">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+        <div className="flex flex-col lg:flex-row items-start gap-16">
 
           {/* Left: text */}
           <motion.div className="flex-1 max-w-2xl" variants={container} initial="hidden" animate="show">
@@ -115,30 +117,32 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div variants={item} className="flex flex-wrap gap-4 mb-10">
-              <motion.a
-                href="#projects"
-                onClick={(e) => { e.preventDefault(); document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="btn-primary"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <ExternalLink size={16} />
-                View My Work
-              </motion.a>
-              <motion.a
-                href="/Owais_Khan_Resume.pdf"
-                download
-                className="btn-secondary"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Download size={16} />
-                Download CV
-              </motion.a>
+              <Magnetic strength={0.3}>
+                <motion.a
+                  href="#projects"
+                  onClick={(e) => { e.preventDefault(); document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" }); }}
+                  className="btn-primary"
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <ExternalLink size={16} />
+                  View My Work
+                </motion.a>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <motion.a
+                  href="/Owais_Khan_Resume.pdf"
+                  download
+                  className="btn-secondary"
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <Download size={16} />
+                  Download CV
+                </motion.a>
+              </Magnetic>
             </motion.div>
 
             {/* Social links */}
-            <motion.div variants={item} className="flex items-center gap-3 flex-wrap">
+            <motion.div variants={item} className="flex items-center gap-3 flex-wrap mb-2">
               {[
                 { icon: FiGithub,    href: "https://github.com/iamowais7",                         label: "GitHub"    },
                 { icon: FiLinkedin,  href: "https://www.linkedin.com/in/iamosk",                   label: "LinkedIn"  },
@@ -161,11 +165,16 @@ export default function Hero() {
                 </motion.a>
               ))}
             </motion.div>
+
+            {/* Code window — desktop only, below social links */}
+            <motion.div variants={item} className="hidden lg:block w-full max-w-sm">
+              <CodeWindow />
+            </motion.div>
           </motion.div>
 
           {/* Right: avatar */}
           <motion.div
-            className="flex flex-col items-center gap-5 shrink-0"
+            className="flex flex-col items-center gap-5 shrink-0 lg:mt-20"
             initial={{ opacity: 0, scale: 0.8, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.5, ease: "circOut" as const }}

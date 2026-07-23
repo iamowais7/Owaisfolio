@@ -9,6 +9,8 @@ import {
   SiOpenai, SiAnthropic, SiGooglegemini,
 } from "react-icons/si";
 import { Cpu, Code2 } from "lucide-react";
+import TechGlobe from "../TechGlobe";
+import ScrambleText from "../ScrambleText";
 
 type Skill = {
   name: string;
@@ -102,12 +104,14 @@ export default function Skills() {
         >
           <span className="section-tag mb-4 inline-flex">Technical Arsenal</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Skills &amp; <span className="gradient-text">Technologies</span>
+            Skills &amp; <ScrambleText text="Technologies" trigger={inView} className="gradient-text" delay={200} />
           </h2>
           <p className="text-slate-400 mt-4 max-w-xl mx-auto">
             Battle-tested in production — and yes, vibe coding is a real skill.
           </p>
         </motion.div>
+
+        <TechGlobe />
 
         <motion.div
           variants={container}

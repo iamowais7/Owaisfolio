@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { ExternalLink, Star, GitFork, ChevronLeft, ChevronRight } from "lucide-react";
+import ScrambleText from "../ScrambleText";
 import { FiGithub } from "react-icons/fi";
 
 const projects = [
@@ -198,7 +199,7 @@ export default function Projects() {
         >
           <span className="section-tag mb-4 inline-flex"><Star size={12} />Owaisfolio</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Featured <span className="gradient-text">Projects</span>
+            Featured <ScrambleText text="Projects" trigger={inView} className="gradient-text" delay={200} />
           </h2>
           <p className="text-slate-400 mt-4 max-w-xl mx-auto">
             Real apps shipped with care. AI-first, production-grade.

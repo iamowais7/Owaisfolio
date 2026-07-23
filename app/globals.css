@@ -387,3 +387,21 @@ html.light .input-glow:focus {
 html.light ::-webkit-scrollbar-track { background: #f1f5f9; }
 html.light .noise-overlay::after { opacity: 0.3; }
 html.light .skill-progress-track { background: rgba(0,0,0,0.06); }
+
+/* ─── Navbar floating dock ──────────────────────────── */
+.dock-ghost {
+  background: transparent;
+  border: 1px solid rgba(99,102,241,0.1);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+.dock-ghost:hover {
+  background: rgba(8,12,40,0.92);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+html.light .dock-ghost {
+  border-color: rgba(99,102,241,0.15);
+}
+html.light .dock-ghost:hover {
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+}

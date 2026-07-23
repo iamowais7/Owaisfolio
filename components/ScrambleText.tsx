@@ -14,7 +14,7 @@ interface Props {
 export default function ScrambleText({ text, trigger, className, delay = 0 }: Props) {
   const [output, setOutput] = useState(text);
   const rafRef     = useRef(0);
-  const timerRef   = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef   = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     if (!trigger) return;

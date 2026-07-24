@@ -44,6 +44,91 @@ function useTypewriter(texts: string[], speed = 80, deleteSpeed = 45, pauseMs = 
   return text;
 }
 
+const COMMITS = [
+  { type: "feat",     hash: "a3f2c1d", msg: "integrate Claude AI for reporting"   },
+  { type: "fix",      hash: "b7e9d2a", msg: "optimize PostgreSQL query latency"   },
+  { type: "chore",    hash: "c1a4f3b", msg: "update Apache Airflow DAG schedules" },
+  { type: "feat",     hash: "d8b3e9c", msg: "add OAuth 2.0 via Keycloak"          },
+  { type: "perf",     hash: "e2f7a1d", msg: "cut ETL pipeline time by 40%"        },
+  { type: "refactor", hash: "f4c8b2e", msg: "modularize FastAPI middleware layer"  },
+  { type: "feat",     hash: "g9d1a7f", msg: "build Fluree data sync endpoints"    },
+  { type: "fix",      hash: "h5e2b4c", msg: "resolve race condition in handler"   },
+  { type: "feat",     hash: "i3f6c8a", msg: "real-time dashboard metrics API"     },
+  { type: "docs",     hash: "j7a4d2b", msg: "update REST API contracts"           },
+];
+
+const TYPE_COLOR: Record<string, string> = {
+  feat:     "#4ade80",
+  fix:      "#f87171",
+  chore:    "#94a3b8",
+  perf:     "#fb923c",
+  refactor: "#c084fc",
+  docs:     "#60a5fa",
+};
+
+function GitLogFeed() {
+  const [visible, setVisible] = useState(0);
+
+  useEffect(() => {
+    setVisible(0);
+    let i = 0;
+    const tick = () => {
+      i++;
+      setVisible(i);
+      if (i < COMMITS.length) {
+        setTimeout(tick, 600);
+      } else {
+        setTimeout(() => {
+          setVisible(0);
+          setTimeout(() => { i = 0; tick(); }, 300);
+        }, 3000);
+      }
+    };
+    const start = setTimeout(tick, 800);
+    return () => clearTimeout(start);
+  }, []);
+
+  return (
+    <div
+      className="hidden lg:block w-full rounded-xl overflow-hidden"
+      style={{
+        width: "clamp(220px, 65vw, 290px)",
+        background: "#0d1117",
+        border: "1px solid rgba(99,102,241,0.2)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+        fontFamily: "monospace",
+      }}
+    >
+      {/* Header */}
+      <div className="flex items-center gap-2 px-3 py-2.5" style={{ background: "#161b22", borderBottom: "1px solid rgba(99,102,241,0.15)" }}>
+        <span style={{ color: "#4ade80", fontSize: 11 }}>$</span>
+        <span style={{ color: "#94a3b8", fontSize: 11 }}>git log --oneline</span>
+        <span className="ml-auto w-1.5 h-3.5 rounded-sm" style={{ background: "#818cf8", animation: "blink 1s step-end infinite" }} />
+      </div>
+
+      {/* Commits */}
+      <div className="px-3 py-2.5 flex flex-col gap-1.5" style={{ minHeight: 180 }}>
+        {COMMITS.slice(0, visible).map((c, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-2"
+          >
+            <span style={{ color: TYPE_COLOR[c.type] ?? "#94a3b8", fontSize: 8 }}>●</span>
+            <span style={{ color: "#484f58", fontSize: 10 }}>{c.hash}</span>
+            <span style={{ fontSize: 10 }}>
+              <span style={{ color: TYPE_COLOR[c.type] ?? "#94a3b8" }}>{c.type}</span>
+              <span style={{ color: "#8b949e" }}>: {c.msg}</span>
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
@@ -229,6 +314,9 @@ export default function Hero() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Git log feed — desktop only, below photo */}
+            <GitLogFeed />
 
             {/* Tech badges — mobile only, shown as a grid below photo */}
             <div className="flex flex-wrap justify-center gap-2 lg:hidden mb-16">

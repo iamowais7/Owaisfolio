@@ -90,7 +90,7 @@ function GitLogFeed() {
 
   return (
     <div
-      className="hidden lg:block w-full rounded-xl overflow-hidden"
+      className="w-full rounded-xl overflow-hidden"
       style={{
         width: "clamp(220px, 65vw, 290px)",
         background: "#0d1117",
@@ -259,7 +259,7 @@ export default function Hero() {
 
           {/* Right: avatar */}
           <motion.div
-            className="flex flex-col items-center gap-5 shrink-0 lg:mt-20"
+            className="flex flex-col items-center gap-5 shrink-0 lg:mt-28"
             initial={{ opacity: 0, scale: 0.8, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.5, ease: "circOut" as const }}
@@ -316,7 +316,9 @@ export default function Hero() {
             </div>
 
             {/* Git log feed — desktop only, below photo */}
-            <GitLogFeed />
+            <div className="hidden lg:block w-full mt-10">
+              <GitLogFeed />
+            </div>
 
             {/* Tech badges — mobile only, shown as a grid below photo */}
             <div className="flex flex-wrap justify-center gap-2 lg:hidden mb-16">

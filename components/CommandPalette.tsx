@@ -128,7 +128,14 @@ export default function CommandPalette() {
           >
             <div
               className="relative px-4 py-3 rounded-2xl rounded-bl-sm text-sm font-medium leading-snug"
-              style={{
+              style={mounted && resolvedTheme === "light" ? {
+                background: "rgba(255,255,255,0.97)",
+                border: "1px solid rgba(99,102,241,0.3)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                backdropFilter: "blur(20px)",
+                color: "#1e293b",
+                whiteSpace: "nowrap",
+              } : {
                 background: "rgba(8,12,28,0.95)",
                 border: "1px solid rgba(99,102,241,0.3)",
                 boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
@@ -141,9 +148,9 @@ export default function CommandPalette() {
                 <span>
                   ⚡{" "}
                   <kbd style={{ fontFamily: "monospace", fontSize: 11, padding: "1px 6px", borderRadius: 5, background: "rgba(99,102,241,0.18)", border: "1px solid rgba(99,102,241,0.35)", color: "#818cf8" }}>Ctrl K</kbd>
-                  {" "}— command palette
+                  {" "}<span style={{ color: mounted && resolvedTheme === "light" ? "#475569" : "#94a3b8" }}>— command palette</span>
                 </span>
-                <span style={{ color: "#94a3b8" }}>
+                <span style={{ color: mounted && resolvedTheme === "light" ? "#64748b" : "#94a3b8" }}>
                   🖥️{" "}
                   <kbd style={{ fontFamily: "monospace", fontSize: 11, padding: "1px 6px", borderRadius: 5, background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ade80" }}>Ctrl `</kbd>
                   {" "}— hacker terminal
@@ -155,7 +162,7 @@ export default function CommandPalette() {
                 style={{
                   borderLeft: "8px solid transparent",
                   borderRight: "8px solid transparent",
-                  borderTop: "8px solid rgba(8,12,28,0.95)",
+                  borderTop: `8px solid ${mounted && resolvedTheme === "light" ? "rgba(255,255,255,0.97)" : "rgba(8,12,28,0.95)"}`,
                 }}
               />
             </div>

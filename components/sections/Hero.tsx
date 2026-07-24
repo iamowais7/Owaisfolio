@@ -259,7 +259,7 @@ export default function Hero() {
 
           {/* Right: avatar */}
           <motion.div
-            className="flex flex-col items-center gap-5 shrink-0 lg:mt-28"
+            className="flex flex-col items-center gap-5 shrink-0 lg:mt-32"
             initial={{ opacity: 0, scale: 0.8, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.5, ease: "circOut" as const }}
@@ -316,7 +316,7 @@ export default function Hero() {
             </div>
 
             {/* Git log feed — desktop only, below photo */}
-            <div className="hidden lg:block w-full mt-10">
+            <div className="hidden lg:block w-full mt-32">
               <GitLogFeed />
             </div>
 

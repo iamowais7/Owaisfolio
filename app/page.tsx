@@ -1,5 +1,4 @@
 import CustomCursor from "@/components/CustomCursor";
-import ScrollProgress from "@/components/ScrollProgress";
 import AiChat from "@/components/AiChat";
 import Terminal from "@/components/Terminal";
 import CommandPalette from "@/components/CommandPalette";
@@ -22,7 +21,6 @@ export default function Home() {
   return (
     <>
       <Loader />
-      <ScrollProgress />
       <CursorSpotlight />
       <CustomCursor />
       <AiChat />

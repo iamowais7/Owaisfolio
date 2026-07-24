@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Server, Database, Cpu, MapPin, Coffee, Zap } from "lucide-react";
 import ScrambleText from "../ScrambleText";
-import GithubHeatmap from "../GithubHeatmap";
 
 function AnimatedCounter({ value, color, inView }: { value: string; color: string; inView: boolean }) {
   const match  = value.match(/^(\d+)(\D*)$/);
@@ -186,15 +185,6 @@ export default function About() {
           ))}
         </motion.div>
 
-        {/* GitHub contribution heatmap */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-8 glass glow-border rounded-2xl p-6"
-        >
-          <GithubHeatmap />
-        </motion.div>
       </div>
     </section>
   );

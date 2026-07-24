@@ -5,7 +5,6 @@ import CommandPalette from "@/components/CommandPalette";
 import Loader from "@/components/Loader";
 import AchievementToast from "@/components/AchievementToast";
 import CursorSpotlight from "@/components/CursorSpotlight";
-import KeyboardHint from "@/components/KeyboardHint";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -27,7 +26,6 @@ export default function Home() {
       <Terminal />
       <CommandPalette />
       <AchievementToast />
-      <KeyboardHint />
       <Navbar />
       <main>
         <Hero />

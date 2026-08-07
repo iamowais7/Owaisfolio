@@ -30,7 +30,7 @@ function AnimatedCounter({ value, color, inView }: { value: string; color: strin
 }
 
 const stats = [
-  { value: "10+",  label: "Months at Fluree",    color: "#818cf8" },
+  { value: "12+",  label: "Months at Fluree",    color: "#818cf8" },
   { value: "3",    label: "Roles & Internships", color: "#c084fc" },
   { value: "5+",   label: "IBM Certifications",  color: "#22d3ee" },
   { value: "2025", label: "MCA Graduate · AMU",  color: "#f472b6" },

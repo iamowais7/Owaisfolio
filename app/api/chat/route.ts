@@ -63,7 +63,7 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const result = streamText({
-    model: groq("llama-3.1-8b-instant"),
+    model: groq("openai/gpt-oss-20b"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
     providerOptions: { groq: { max_tokens: 400 } },

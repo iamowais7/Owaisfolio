@@ -30,6 +30,17 @@ const projects = [
     accentColor: "#22d3ee",
   },
   {
+    title:       "SwiftBite",
+    description: "Production-style food delivery platform on a microservices architecture — six Express + TypeScript services over HTTP and RabbitMQ. Real-time rider tracking on Leaflet maps, AI-powered semantic search and order-support chatbot via Groq, dual payment gateways, and role-based access control.",
+    tags:        ["React 19", "TypeScript", "Node.js", "MongoDB", "RabbitMQ", "Socket.io"],
+    github:      "https://github.com/iamowais7/swiftbits",
+    demo:        "https://swiftbits.vercel.app/",
+    stars:       1,
+    forks:       0,
+    gradient:    "from-orange-500/20 via-red-500/10 to-amber-500/10",
+    accentColor: "#fb923c",
+  },
+  {
     title:       "Plusfeed",
     description: "A modern content feed platform built for seamless discovery and sharing. Clean UI with real-time updates and a smooth, responsive experience across all devices.",
     tags:        ["React", "JavaScript", "Tailwind CSS"],

@@ -34,7 +34,7 @@ const projects = [
     description: "Production-style food delivery platform on a microservices architecture — six Express + TypeScript services over HTTP and RabbitMQ. Real-time rider tracking on Leaflet maps, AI-powered semantic search and order-support chatbot via Groq, dual payment gateways, and role-based access control.",
     tags:        ["React 19", "TypeScript", "Node.js", "MongoDB", "RabbitMQ", "Socket.io"],
     github:      "https://github.com/iamowais7/swiftbits",
-    demo:        "https://swiftbits.vercel.app/",
+    demo:        "https://swiftbite-ai.vercel.app/",
     stars:       1,
     forks:       0,
     gradient:    "from-orange-500/20 via-red-500/10 to-amber-500/10",

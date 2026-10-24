@@ -17,6 +17,17 @@ Mohammad Owais Khan is a Software Engineer at Fluree, working remotely from New 
 • Summer Intern @ FEXLE Services — June–November 2024 (Jaipur)
   - Salesforce CRM development, Apex, LWC
 
+━━ FREELANCE / CONSULTING ━━
+• AI Engineer (Freelance) @ Hyperscalex.ai — 2024–Present (Remote)
+  - Collaborating with Hyperscalex.ai's AI team on production LLM-driven systems
+  - Working alongside leadership with 25+ years of enterprise AI experience out of Google
+  - Built a full automation infrastructure for one of Hyperscalex.ai's clients (client name confidential)
+  - Automated 5 distinct pipeline scenarios, each spanning 15+ steps, all kept in sync end-to-end
+  - Integrated Gemini for output predictions, plus 3 ML models that take input and return predictions
+  - Connected Power BI dashboards for live data stats
+  - The resulting application is used by 1000+ people
+  - Open to additional freelance / consulting engagements alongside his full-time role
+
 ━━ TECH STACK ━━
 Backend: Node.js, Express.js, FastAPI, Python, Django
 Databases: PostgreSQL, SQL
@@ -46,7 +57,7 @@ Twitter/X: https://x.com/iamosk_
 Instagram: https://www.instagram.com/iamosk_/
 
 ━━ AVAILABILITY ━━
-Open to full-time roles, contract work, and interesting collaborations. Prefers remote. Currently employed at Fluree but actively open to new opportunities.
+Open to full-time roles, freelance/contract work, and interesting collaborations. Prefers remote. Currently employed at Fluree and freelancing with Hyperscalex.ai, but actively open to new opportunities.
 
 ━━ PERSONAL ━━
 Rides bikes on weekends (Delhi NCR highways), plays snooker, AMU campus nostalgia. Motto: while(alive) { vibe(); }

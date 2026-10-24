@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search, User, Cpu, Briefcase, FolderOpen, Mail,
+  Search, User, Cpu, Briefcase, Rocket, FolderOpen, Mail,
   Download, GraduationCap, Sun, Moon, TerminalSquare, Flame,
 } from "lucide-react";
 import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
@@ -47,6 +47,7 @@ export default function CommandPalette() {
     { id: "about",      label: "About",           description: "Who I am",                  category: "Navigate", Icon: User,          action: () => scrollTo("about",      close) },
     { id: "skills",     label: "Skills",           description: "Tech stack",                category: "Navigate", Icon: Cpu,           action: () => scrollTo("skills",     close) },
     { id: "experience", label: "Experience",       description: "Work history",              category: "Navigate", Icon: Briefcase,     action: () => scrollTo("experience", close) },
+    { id: "freelance",  label: "Freelance",        description: "Client work & collabs",     category: "Navigate", Icon: Rocket,        action: () => scrollTo("freelance",  close) },
     { id: "projects",   label: "Projects",         description: "Things I've built",         category: "Navigate", Icon: FolderOpen,    action: () => scrollTo("projects",   close) },
     { id: "vibes",      label: "Vibes",            description: "My aesthetic",              category: "Navigate", Icon: Flame,         action: () => scrollTo("vibes",      close) },
     { id: "education",  label: "Education",        description: "Academic background",       category: "Navigate", Icon: GraduationCap, action: () => scrollTo("education",  close) },

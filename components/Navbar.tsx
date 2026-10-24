@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, User, Cpu, Briefcase, FolderOpen, Mail, Flame } from "lucide-react";
+import { Sun, Moon, User, Cpu, Briefcase, Rocket, FolderOpen, Mail, Flame } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const navLinks = [
   { label: "About",      href: "#about",      icon: User       },
   { label: "Skills",     href: "#skills",     icon: Cpu        },
   { label: "Experience", href: "#experience", icon: Briefcase  },
+  { label: "Freelance",  href: "#freelance",  icon: Rocket     },
   { label: "Projects",   href: "#projects",   icon: FolderOpen },
   { label: "Vibes",      href: "#vibes",      icon: Flame      },
   { label: "Contact",    href: "#contact",    icon: Mail       },
@@ -25,7 +26,7 @@ export default function Navbar() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); }),
-      { rootMargin: "-50% 0px -50% 0px" }
+      { rootMargin: "-45% 0px -45% 0px" }
     );
     document.querySelectorAll("section[id]").forEach((s) => observer.observe(s));
     return () => observer.disconnect();

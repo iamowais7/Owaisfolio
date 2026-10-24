@@ -53,6 +53,16 @@ export default function AiChat() {
     if (open) { setHasOpened(true); setShowPopup(false); setTimeout(() => inputRef.current?.focus(), 300); }
   }, [open]);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (detail) setInput(detail);
+      setOpen(true);
+    };
+    document.addEventListener("open-ai-chat-with", handler);
+    return () => document.removeEventListener("open-ai-chat-with", handler);
+  }, []);
+
   const submit = () => {
     const text = input.trim();
     if (!text || isLoading) return;
